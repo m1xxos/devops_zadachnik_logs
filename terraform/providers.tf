@@ -1,4 +1,10 @@
 terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+
   backend "s3" {
     endpoint                    = "https://storage.yandexcloud.net"
     region                      = "ru-central1"
@@ -11,4 +17,8 @@ terraform {
     skip_requesting_account_id  = true
     skip_s3_checksum            = true
   }
+}
+
+provider "yandex" {
+  zone = "ru-central1-d"
 }
