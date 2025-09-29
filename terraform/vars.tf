@@ -12,7 +12,7 @@ variable "image_id" {
 
 variable "disk_size" {
   type    = number
-  default = 40
+  default = 20
 }
 
 variable "vm_size" {
