@@ -25,7 +25,7 @@ resource "yandex_compute_instance" "app01" {
 
 
   metadata = {
-    ssh-keys = "m1xxos:${file("~/.ssh/id_rsa.pub")}"
+    user-data = "${file("./files/meta.txt")}"
   }
 
   scheduling_policy {
@@ -62,7 +62,7 @@ resource "yandex_compute_instance" "mon01" {
 
 
   metadata = {
-    ssh-keys = "m1xxos:${file("~/.ssh/id_rsa.pub")}"
+    user-data = "${file("./files/meta.txt")}"
   }
 
   scheduling_policy {
@@ -99,7 +99,7 @@ resource "yandex_compute_instance" "prom01" {
 
 
   metadata = {
-    ssh-keys = "m1xxos:${file("~/.ssh/id_rsa.pub")}"
+    user-data = "${file("./files/meta.txt")}"
   }
 
   scheduling_policy {
