@@ -1,0 +1,5 @@
+- name: Grafana Install
+  hosts: mon01
+  become: true
+  roles:
+    - monitoring_stack

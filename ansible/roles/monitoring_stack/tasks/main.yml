@@ -1,0 +1,22 @@
+---
+# tasks file for monitoring_stack
+
+- name: Install prerequisite packages
+  ansible.builtin.apt:
+    state: present
+    name:
+      - apt-transport-https
+      - software-properties-common
+      - wget
+
+- name: Import the GPG key
+  ansible.builtin.get_url:
+    url: https://apt.grafana.com/gpg.key
+    dest: /etc/apt/keyrings/grafana.gpg
+    mode: '0644'
+
+- name: Add Grafana repository
+  ansible.builtin.apt_repository:
+    state: present
+    repo: "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main"
+    update_cache: true

@@ -1,0 +1,8 @@
+all:
+  hosts:
+    app01:
+      ansible_host: 84.201.144.162
+    mon01:
+      ansible_host: 51.250.38.245
+    prom01:
+      ansible_host: 51.250.45.130
