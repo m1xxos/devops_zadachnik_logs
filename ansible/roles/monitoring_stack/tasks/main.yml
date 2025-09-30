@@ -12,11 +12,25 @@
 - name: Import the GPG key
   ansible.builtin.copy:
     src: ./files/gpg.key
-    dest: /etc/apt/keyrings/grafana.gpg
+    dest: /tmp/grafana.gpg
     mode: '0644'
+
+- name: Dearmor GPG key
+  ansible.builtin.shell:
+    cat /tmp/grafana.gpg | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
 
 - name: Add Grafana repository
   ansible.builtin.apt_repository:
     state: present
-    repo: "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main"
-    update_cache: true
+    repo: "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://mirror.yandex.ru/mirrors/packages.grafana.com/oss/deb stable main"
+
+- name: Install Grafana packages
+  ansible.builtin.apt:
+    state: present
+    name: grafana
+
+- name: Start and enable Grafana service
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: grafana-server
