@@ -5,6 +5,11 @@ variable "labels" {
   }
 }
 
+variable "network_id" {
+  type = string
+  default = "enpsqkm6l0ulfarfilvq"
+}
+
 variable "image_id" {
   type    = string
   default = "fd8lcu8djvrg7vilobhm"
