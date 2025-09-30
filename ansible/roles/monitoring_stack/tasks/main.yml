@@ -10,8 +10,8 @@
       - wget
 
 - name: Import the GPG key
-  ansible.builtin.get_url:
-    url: https://apt.grafana.com/gpg.key
+  ansible.builtin.copy:
+    src: ./files/gpg.key
     dest: /etc/apt/keyrings/grafana.gpg
     mode: '0644'
 
