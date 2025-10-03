@@ -1,8 +1,15 @@
-all:
+main:
+  vars:
+    ansible_ssh_common_args: '-J m1xxos@158.160.140.201'
   hosts:
     app01:
-      ansible_host: 84.201.144.162
+      ansible_host: 10.126.0.11
     mon01:
-      ansible_host: 51.250.38.245
+      ansible_host: 10.126.0.4
     prom01:
-      ansible_host: 51.250.45.130
+      ansible_host: 10.126.0.7
+
+jump:
+  hosts:
+    jmp01:
+      ansible_host: 158.160.140.201
