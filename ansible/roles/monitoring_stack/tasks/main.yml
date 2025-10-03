@@ -34,3 +34,8 @@
     state: started
     enabled: true
     name: grafana-server
+
+- name: Install Loki with dependencies
+  ansible.builtin.apt:
+    name: loki, promtail
+    state: present
