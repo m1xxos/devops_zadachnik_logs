@@ -108,3 +108,42 @@ resource "yandex_compute_instance" "prom01" {
 
   labels = var.labels
 }
+
+
+resource "yandex_compute_instance" "jmp01" {
+  name = "jmp01"
+  hostname = "jmp01"
+  platform_id = "standard-v3"
+
+  resources {
+    cores  = var.vm_size.cores
+    memory = 2
+    core_fraction = 20
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = var.image_id
+      size     = var.disk_size
+      type = "network-ssd"
+    }
+  }
+
+  network_interface {
+    index     = 0
+    subnet_id = yandex_vpc_subnet.zadachnick-logs.id
+    nat = true
+    security_group_ids = [ yandex_vpc_security_group.zadachnick-logs.id ]
+  }
+
+
+  metadata = {
+    user-data = "${file("./files/meta.txt")}"
+  }
+
+  scheduling_policy {
+    preemptible = true
+  }
+
+  labels = var.labels
+}
